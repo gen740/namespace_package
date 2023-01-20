@@ -7,6 +7,25 @@ nomespace-A は A の拡張モジュールを意図されているものとし�
 
 それぞれのケースは、真新しい python の環境で行われているとします。
 
+ディレクトリ構成は
+
+- A
+```
+A
+├── __init__.py
+└── foo.py
+pyproject.toml
+```
+
+- namespace-A
+```
+namespace-A
+└── A
+    └── B
+        └── C.py
+pyproject.toml
+```
+
 ## Case 1
 
 ```bash

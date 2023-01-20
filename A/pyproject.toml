@@ -8,4 +8,4 @@ description = "Packge A"
 dynamic = ["version"]
 
 [tool.setuptools.packages.find]
-namespaces = false
+namespaces = true

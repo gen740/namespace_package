@@ -3,10 +3,9 @@ requires = ["setuptools >= 61.1.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "A"
+name = "namespace-A"
 description = "Namespace Packge A"
 dynamic = ["version"]
 
 [tool.setuptools.packages.find]
-include = ["foo*"]
-namespaces = false
+include = ["A*"]

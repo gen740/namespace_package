@@ -12,36 +12,44 @@ nomespace-A は A の拡張モジュールを意図されているものとし�
 - A
 ```
 A
-├── __init__.py
-└── foo.py
-pyproject.toml
+├── A
+│   ├── __init__.py
+│   └── foo.py
+└── pyproject.toml
 ```
 
 - namespace-A
 ```
 namespace-A
-└── A
-    └── B
-        └── C.py
-pyproject.toml
+├── A
+│   └── B
+│       └── C.py
+└── pyproject.toml
+```
+
+## 動作確認
+```bash
+pip install --quiet ./A ./namespace-A
+cd workspace
+echo "******** Parent Package *********"
+python3 -c "import A;A.foo.test_print();"
+echo "******** Namespace Package *********"
+python3 -c "from A.B.C import foo;foo();"
 ```
 
 ## Case 1
 
 ```bash
-pip install -e ./A
+pip freeze > tmp.txt; pip uninstall -y -r tmp.txt; rm tmp.txt
+pip install --quiet ./namespace-A
+pip install --quiet -e ./A
 cd workspace
-python3 -c "import A; print(A.__path__)"
+echo "******** Parent Package *********"
+python3 -c "import A;A.foo.test_print();"
+echo "******** Namespace Package *********"
+python3 -c "from A.B.C import foo;foo();"
 ```
 
-というコマンドは
+この場合は、
 
-```
-['/(省略)/namespace_package/A/A']
-```
-
-というようになり、これは namespace_package ではない状況です。
-
-<!-- `A/pyproject.toml` の `namespaces = false` を `namespaces = true` に変えると。 -->
-
-
+python3 -c "import A;print(A.__path__)"
